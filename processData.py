@@ -149,8 +149,8 @@ data_path= './DATA/FRvideos.csv'
 def main():
 	print("Opening file...")
 	f = pd.read_csv(data_path)
-	tab = getLowerUpperPercentage(f)
 	print("Extracting data from file...")
+	tab = getLowerUpperPercentage(f)
 	tab1 = tab[0]
 	tab2 = tab[1]
 	tab3 = getNbOfTags(f)
