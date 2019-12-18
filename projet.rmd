@@ -1,0 +1,40 @@
+---
+title: "Projet"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+doc si perdu : <http://rmarkdown.rstudio.com>
+
+## Extraction des données
+
+Nous avons extrait nos donnée de https://www.kaggle.com/datasnaek/youtube-new.
+Nous avons décidé d'extraire les attributs suivant :
+
+|                 Nom                |   Attribut  |
+|:----------------------------------:|:-----------:|
+|           Taux LOWER Case          | quantitatif |
+|           Taux UPPER Case          | quantitatif |
+|               Nb tags              | quantitatif |
+|               Nb vues              | quantitatif |
+|           Nb commentaires          | quantitatif |
+|              Nb likes              | quantitatif |
+|             Nb dislikes            | quantitatif |
+| Taille de la  description (en mot) | quantitatif |
+|              Catégorie             |  qualitatif |
+| Jour de la semaine                 |  qualitatif |
+|        Moment de la  journée       |  qualitatif |
+|    Nombre de lien en description   | quantitatif |
+
+
+Vous pouvez retrouver le code commenté dans le script 'processData.py'.
+```{r}
+install.packages("FactoMineR")
+```
+
