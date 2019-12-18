@@ -42,5 +42,6 @@ def extract_category():
 	r = r.get('category_id')
 	for category in r:
 		cat_tab.append(categories[str(category)])
+	return cat_tab
 
 extract_category()
