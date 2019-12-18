@@ -1,6 +1,9 @@
 # Data Set
 DATA/
 
+#HTML
+*.html
+
 # Trained Model
 model/
 
