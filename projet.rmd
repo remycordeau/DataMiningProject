@@ -33,8 +33,14 @@ Nous avons décidé d'extraire les attributs suivant :
 |    Nombre de lien en description   | quantitatif |
 
 
-Vous pouvez retrouver le code commenté dans le script 'processData.py'.
+Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'.
 ```{r}
 install.packages("FactoMineR")
+```
+
+On récupère les données :
+
+```{r}
+data = read.csv("./DATA/youtubeTrends.csv")
 ```
 
