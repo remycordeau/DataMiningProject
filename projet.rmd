@@ -6,13 +6,19 @@ output:
     df_print: paged
 ---
 
+# Projet d'Analyse et de Fouille de Données Massive
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(FactoMineR)
 ```
 
 doc si perdu : <http://rmarkdown.rstudio.com>
 
-## Extraction des données
+## Introduction :
+Le sujet nous demande de faire blabla
+
+## Présentation de nos données :
 
 Nous avons extrait nos donnée de https://www.kaggle.com/datasnaek/youtube-new.
 Nous avons décidé d'extraire les attributs suivant :
@@ -32,23 +38,55 @@ Nous avons décidé d'extraire les attributs suivant :
 |        Moment de la  journée       |  qualitatif |
 |    Nombre de lien en description   | quantitatif |
 
+=====
+AJOUTER COMMENTAIRE SUR CE QU'ON ATTENDS DE CHAQUE VARIABLE
+=====
 
 Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'.
-```{r}
-install.packages("FactoMineR")
-library(FactoMineR)
-```
 
-On récupère les données :
+## Analyse des données
+Dans cette partie, nous allons analyser les données que nous avons extrait et qui se trouvent dans le fichier "youtubeTrends.csv". Ce fichier contient 40703 individus, ce qui est beaucoups trop ! Nous voulons avoir uniquement une centaine d'invidus, nous choisisons donc une centaine d'individu aléatoirement. 
 
+Code pour charger les 100 individus aléatoire :
 ```{r}
 data = read.csv("./DATA/youtubeTrends.csv")
 data = data[sample(nrow(data), 100),]
 ```
 
+Code pour récupérer les 100 individus que nous avons utilisé et sauvegardé :
+```{r}
+setwd("CHEMIN VERS LA RACINE DU DOSSIER CONTENANT LE RDATA")
+load('./random_data.rdata')
+```
+
+
+### ACP
+On récupère les données :
+
+
+
 
 La première analyse que nous allons essayé sera une ACP, pour ce faire, il faut que l'on prépare nos données en retirant les données qualitatives que nous avons.
 Ensuite On execute l'ACP sur nos données.
+```{r}
+# On retire les données qualitatives
+data_ACP = data
+data_ACP$category <- NULL
+data_ACP$momentOfDay <- NULL
+data_ACP$day <- NULL
+data_ACP$index <- NULL
+
+# On retire les données considéré comme faiblement corellé après les premiers tests 
+data_ACP$nbTags <- NULL
+data_ACP$nbWords <- NULL
+data_ACP$nbLinks <- NULL
+
+res.pca = PCA(data_ACP, scale.unit=TRUE, ncp=6, graph=T)
+```
+
+Sur la figure on peut voir que l'on représente bien les données X% sur l'axe 1 et Y% sur l'axe 2.
+On voit que le nombre de like et dislike sont corrélé, après analyse, on se rend compte que ces deux variables ne capturent pas vraiment ce que l'on voulait. En effet
+
 ```{r}
 # On retire les données qualitatives
 data_ACP = data
