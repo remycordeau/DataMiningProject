@@ -36,11 +36,61 @@ Nous avons décidé d'extraire les attributs suivant :
 Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'.
 ```{r}
 install.packages("FactoMineR")
+library(FactoMineR)
 ```
 
 On récupère les données :
 
 ```{r}
 data = read.csv("./DATA/youtubeTrends.csv")
+data = data[sample(nrow(data), 100),]
 ```
+
+
+La première analyse que nous allons essayé sera une ACP, pour ce faire, il faut que l'on prépare nos données en retirant les données qualitatives que nous avons.
+Ensuite On execute l'ACP sur nos données.
+```{r}
+# On retire les données qualitatives
+data_ACP = data
+data_ACP$category <- NULL
+data_ACP$momentOfDay <- NULL
+data_ACP$day <- NULL
+data_ACP$index <- NULL
+
+# On retire les données faiblement corellé
+data_ACP$nbTags <- NULL
+data_ACP$nbWords <- NULL
+data_ACP$nbLinks <- NULL
+
+# Ajout du ratio de like et dislike
+data_ACP$ratioLikes <- data_ACP$nbLikes/(data_ACP$nbLikes + data_ACP$nbDislikes)
+data_ACP$ratioDislikes <- data_ACP$nbDislikes/(data_ACP$nbLikes + data_ACP$nbDislikes)
+
+data_ACP$nbLikes <- NULL
+data_ACP$nbDislikes <- NULL
+
+res.pca = PCA(data_ACP, scale.unit=TRUE, ncp=6, graph=T) 
+```
+
+# ACM
+```{r}
+data_ACM = data[1:50,]
+i=0
+while(i<ncol(data_ACM)){
+  i=i+1
+  data_ACM[,i]=as.factor(data_ACM[,i])
+}
+data_ACM$nbTags <- NULL
+data_ACM$nbWords <- NULL
+data_ACM$nbLinks <- NULL
+res.mca = MCA(data_ACM, quali.sup = c(7,8,10), graph = TRUE)
+plot.MCA(res.mca, invisible=c("var"), cex=0.35)
+```
+
+# AFC
+```{r}
+data_AFC = data
+res.afc = CA(data_AFC[, c(2:5 ,12:13)])
+```
+
 
