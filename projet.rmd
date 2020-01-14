@@ -1,9 +1,9 @@
 ---
 title: "Projet"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 # Projet d'Analyse et de Fouille de Données Massive
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(FactoMineR)
 ```
 
-doc si perdu : <http://rmarkdown.rstudio.com>
+&ensp; doc si perdu : <http://rmarkdown.rstudio.com>
 
 ## Introduction :
 Le sujet nous demande de faire blabla
@@ -42,28 +42,20 @@ Nous avons décidé d'extraire les attributs suivant :
 AJOUTER COMMENTAIRE SUR CE QU'ON ATTENDS DE CHAQUE VARIABLE
 =====
 
-Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'.
+Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'. Pour l'utiliser veuillez télécharger les données dans un fichier 'DATA' à la racine du projet. Vous n'avez besoin de ne télécharger que "FR_category_id.json" et "FRvideos.csv".
 
 ## Analyse des données
 Dans cette partie, nous allons analyser les données que nous avons extrait et qui se trouvent dans le fichier "youtubeTrends.csv". Ce fichier contient 40703 individus, ce qui est beaucoups trop ! Nous voulons avoir uniquement une centaine d'invidus, nous choisisons donc une centaine d'individu aléatoirement. 
 
-Code pour charger les 100 individus aléatoire :
-```{r}
-data = read.csv("./DATA/youtubeTrends.csv")
-data = data[sample(nrow(data), 100),]
-```
-
 Code pour récupérer les 100 individus que nous avons utilisé et sauvegardé :
 ```{r}
-setwd("CHEMIN VERS LA RACINE DU DOSSIER CONTENANT LE RDATA")
+setwd("/home/jyra/Documents/Enssat/3A/AFDM/DataMiningProject")
 load('./random_data.rdata')
 ```
 
 
 ### ACP
 On récupère les données :
-
-
 
 
 La première analyse que nous allons essayé sera une ACP, pour ce faire, il faut que l'on prépare nos données en retirant les données qualitatives que nous avons.
@@ -110,20 +102,52 @@ data_ACP$nbDislikes <- NULL
 res.pca = PCA(data_ACP, scale.unit=TRUE, ncp=6, graph=T) 
 ```
 
-# ACM
+## ACM
+
+Dans cette partie, nous allons réaliser une ACM sur 3 attributs qualitatif : le moment de la semaine où la vidéo est publiée, le moment de la journée et la catégorie de la vidéo.
+
+Pour commencer, on prépare nos données, on enlève la moitié des données pour faire l'ACM car sans ça, on se retrouve avec tellement de point que l'on ne peut rien lire. Ensuite, on doit effectuer une petite opération pour transformer nos données en factor (un type spécifique à R). Cette opération est necessaire car sans cela, nous avions une erreure. Enfin, on enlève tous les attributs quantitatif sauf : le nombre de like, dislike et de commentaire. On garde ces attributs car on veut regrouper les attributs quantitatifs en fonctions de leurs succés qui se représente à l'aide des 3 variables quantitatives ci-dessus.
+
 ```{r}
-data_ACM = data[1:50,]
+data_ACM = data[1:50,] 
 i=0
 while(i<ncol(data_ACM)){
   i=i+1
   data_ACM[,i]=as.factor(data_ACM[,i])
 }
+data_ACM$index <- NULL
 data_ACM$nbTags <- NULL
 data_ACM$nbWords <- NULL
 data_ACM$nbLinks <- NULL
-res.mca = MCA(data_ACM, quali.sup = c(7,8,10), graph = TRUE)
-plot.MCA(res.mca, invisible=c("var"), cex=0.35)
+data_ACM$X.lowerCase <- NULL
+data_ACM$X.upperCase <- NULL
+
 ```
+
+### Moment de la semaine
+
+Nous nous interressons au moment de la journée où la vidéo à été publiée. On s'attends éventuellement à voir regroupé ensemble des jours de la semaine en fonction de si ils sont en début milieu et fin de semaine. 
+
+```{r}
+res.mca_1 = MCA(data_ACM, quali.sup = c(4), graph = FALSE)
+plot.MCA(res.mca_1, invisible=c("var"), cex=0.75)
+```
+
+Les résultats obtenues sont plutôt satisfaisant, même si l'ont représente peux les données (5.31%), on observe que certains jours sont reliées comme le Jeudi et Mercredi. Cela semble logique ces deux jours doivent posséder la même visibilité car ils se trouvent en milieu de semaine. Le Vendredi se retrouve un peu à part, on peut imaginer qu'elles s'adressent à un publique adulte qui regarderait les vidéos après le travail. Résultat plus étonnant, on voit que le Samedi et Lundi sont liées ainsi que le Mardi et Dimanche. 
+
+```{r}
+res.mca_2 = MCA(data_ACM, quali.sup = c(5), graph = FALSE)
+plot.MCA(res.mca_2, invisible=c("var"), cex=0.75)
+```
+
+```{r}
+res.mca_3 = MCA(data_ACM, quali.sup = c(7), graph = FALSE)
+plot.MCA(res.mca_3, invisible=c("var"), cex=0.75)
+```
+
+
+
+
 
 # AFC
 ```{r}
