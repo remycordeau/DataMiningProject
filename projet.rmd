@@ -12,16 +12,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(FactoMineR)
 ```
-
-doc si perdu : <http://rmarkdown.rstudio.com>
-
 ## Introduction :
-Le sujet nous demande de faire blabla
+&ensp;Le but du projet est de manipuler différentes méthodes d'analyses de données sur un jeu de données constitué d'une centaine d'individus et d'une dizaine de variables qualitatives et quantitatives. Nous avons choisi comme jeu de données les vidéos présentes dans la catégorie "Tendances" du site YouTube France sur une période allant de novembre 2017 à juin 2018. La catégorie "Tendances" de YouTube met en évidence les vidéos les plus vues et les plus appréciées par les utilisateurs de la plateforme. Elle permet donc une plus grande visibilité pour les créateurs de contenu. Une vidéo est placée dans la catégorie "Tendances" par un algorithme se fondant sur les statistiques de la vidéo ainsi que sur les interactions des utilisateurs avec celle-ci. L'analyse des facteurs permettant à une vidéo d'être présente en "Tendances" peut donc être intéressante pour les vidéastes de la plateforme souhaitant être mis en avant. 
 
 ## Présentation de nos données :
 
-Nous avons extrait nos donnée de https://www.kaggle.com/datasnaek/youtube-new.
-Nous avons décidé d'extraire les attributs suivant :
+&ensp;Nous avons extrait nos données du site Kaggle (https://www.kaggle.com/datasnaek/youtube-new). Ces données contiennent un ensemble de statistiques sur les vidéos de la catégorie "Tendances" de YouTube. Nous avons décidé d'extraire les statistiques qui nous paraissaient pertinentes pour pouvoir déterminer les facteurs influant sur la présence ou non d'une vidéo dans la catégorie "Tendances". Ces statistiques sont resumées dans le tableau suivant et seront utilisées comme variables qualitatives ou quantitatives dans les différentes méthodes d'analyse des données.
 
 |                 Nom                |   Attribut  |
 |:----------------------------------:|:-----------:|
@@ -32,28 +28,27 @@ Nous avons décidé d'extraire les attributs suivant :
 |           Nb commentaires          | quantitatif |
 |              Nb likes              | quantitatif |
 |             Nb dislikes            | quantitatif |
-| Taille de la  description (en mot) | quantitatif |
+|Taille de la  description (en mots) | quantitatif |
 |              Catégorie             |  qualitatif |
 | Jour de la semaine                 |  qualitatif |
 |        Moment de la  journée       |  qualitatif |
 |    Nombre de lien en description   | quantitatif |
 
-=====
-AJOUTER COMMENTAIRE SUR CE QU'ON ATTENDS DE CHAQUE VARIABLE
-=====
+&ensp;Nous pouvons nous attendre à une forte corrélation entre la présence d'une vidéo en "Tendances" et son nombre de vues, de "J'aime" et de commentaires. Néanmoins, d'autres variables peuvent influer de manière indirecte sur le nombre de vues comme le nombre de majuscules dans le titre, le nombre de tags associés à la vidéo ou encore la longueur de la description. La publication de la vidéo peut également être ciblée afin de toucher le plus de personnes possible (une vidéo publiée le vendredi soir à 18h aura probablement plus d'impact qu'une vidéo publiée le mardi matin à 8h). Nous serons également en mesure d'exhiber le type de vidéos qui plaisent au public français via la catégorie mais aussi de comparer les audiences des vidéos appartenant à différentes catégories (par exemple, les personnes regardant des vidéos sportives consultent également des vidéos de mode ou de divertissement). 
 
-Vous pouvez retrouver le code commenté pour l'extraction dans le script 'processData.py'.
+## Traitement du jeu de données
+&ensp;A partir du jeu de données télechargé au format csv, nous avons généré un nouveau fichier csv contenant, pour chaque vidéo, les statistiques listées dans le tableau précédent Vous pouvez retrouver le code commenté pour l'extraction et le traitment des données brutes initiales dans le fichier 'processData.py'.
 
 ## Analyse des données
-Dans cette partie, nous allons analyser les données que nous avons extrait et qui se trouvent dans le fichier "youtubeTrends.csv". Ce fichier contient 40703 individus, ce qui est beaucoups trop ! Nous voulons avoir uniquement une centaine d'invidus, nous choisisons donc une centaine d'individu aléatoirement. 
+&ensp;Dans cette partie, nous allons analyser les données que nous avons extraites et qui se trouvent dans le fichier "youtubeTrends.csv". Ce fichier contient 40703 individus. Néanmoins les méthodes d'analyse détaillées dans cette partie ne porteront que sur une centaine d'invidus. Nous sélectionnons donc 100 vidéos de manière aléatoire dans le fichier "youtubeTrends.csv". Ces 100 vidéos seront utilisées comme individus pour les différentes méthodes d'analyse.  
 
-Code pour charger les 100 individus aléatoire :
+Code pour selectionner les 100 individus aléatoirement :
 ```{r}
 data = read.csv("./DATA/youtubeTrends.csv")
 data = data[sample(nrow(data), 100),]
 ```
 
-Code pour récupérer les 100 individus que nous avons utilisé et sauvegardé :
+Code pour récupérer les 100 individus que nous avons selectionnés et sauvegardés :
 ```{r}
 setwd("CHEMIN VERS LA RACINE DU DOSSIER CONTENANT LE RDATA")
 load('./random_data.rdata')
