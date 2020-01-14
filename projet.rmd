@@ -1,16 +1,17 @@
 ---
-title: "Projet"
+title: "Projet d'Analyse et de Fouille de Données Massive"
 output:
   html_document:
     df_print: paged
   pdf_document: default
 ---
 
-# Projet d'Analyse et de Fouille de Données Massive
+# 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(FactoMineR)
+setwd("/home/jyra/Documents/Enssat/3A/AFDM/DataMiningProject")
 ```
 
 ## Introduction :
@@ -46,7 +47,6 @@ library(FactoMineR)
 &ensp;Dans cette partie, nous allons analyser les données que nous avons extraites et qui se trouvent dans le fichier "youtubeTrends.csv". Ce fichier contient 40703 individus. Néanmoins les méthodes d'analyse détaillées dans cette partie ne porteront que sur une centaine d'invidus. Nous sélectionnons donc 100 vidéos de manière aléatoire dans le fichier "youtubeTrends.csv". Ces 100 vidéos seront utilisées comme individus pour les différentes méthodes d'analyse.  
 
 
-
 Code pour selectionner les 100 individus aléatoirement :
 ```{r}
 data = read.csv("./DATA/youtubeTrends.csv")
@@ -56,7 +56,6 @@ data = data[sample(nrow(data), 100),]
 Code pour récupérer les 100 individus que nous avons utilisé et sauvegardé :
 
 ```{r}
-setwd("/home/jyra/Documents/Enssat/3A/AFDM/DataMiningProject")
 load('./random_data.rdata')
 ```
 
@@ -140,12 +139,18 @@ res.mca_1 = MCA(data_ACM, quali.sup = c(4), graph = FALSE)
 plot.MCA(res.mca_1, invisible=c("var"), cex=0.75)
 ```
 
-Les résultats obtenues sont plutôt satisfaisant, même si l'ont représente peux les données (5.31%), on observe que certains jours sont reliées comme le Jeudi et Mercredi. Cela semble logique ces deux jours doivent posséder la même visibilité car ils se trouvent en milieu de semaine. Le Vendredi se retrouve un peu à part, on peut imaginer qu'elles s'adressent à un publique adulte qui regarderait les vidéos après le travail. Résultat plus étonnant, on voit que le Samedi et Lundi sont liées ainsi que le Mardi et Dimanche. 
+Les résultats obtenues sont plutôt satisfaisant, même si l'on représente peux les données (5.31%), on observe que certains jours sont reliées comme le Jeudi et Mercredi. Cela semble logique ces deux jours doivent posséder la même visibilité car ils se trouvent en milieu de semaine. Le Vendredi se retrouve un peu à part, on peut imaginer qu'elles s'adressent à un publique adulte qui regarderait les vidéos après le travail. Résultat plus étonnant, on voit que le Samedi et Lundi sont liées ainsi que le Mardi et Dimanche. On ne voit pas trop comment donner une explication pour ses corrélations, cependant c'est interressant de le souligner. Publier une vidéo un Lundi ou un Samedi ne semble pas apporter beaucoups de changement.
+
+### Moment de la journée
+
+La prochaine ACM cherche à étudier les corrélations entre les moments de la journée. Intuitivement, on pourrait penser que les vidéos qui sortent l'après-midi n'ont pas le même succés qu'une vidéo qui sortirait le matin ou le soir. 
 
 ```{r}
 res.mca_2 = MCA(data_ACM, quali.sup = c(5), graph = FALSE)
 plot.MCA(res.mca_2, invisible=c("var"), cex=0.75)
 ```
+
+L'ACM est 
 
 ```{r}
 res.mca_3 = MCA(data_ACM, quali.sup = c(7), graph = FALSE)
@@ -156,7 +161,7 @@ plot.MCA(res.mca_3, invisible=c("var"), cex=0.75)
 
 
 
-# AFC
+## AFC
 ```{r}
 data_AFC = data
 res.afc = CA(data_AFC[, c(2:5 ,12:13)])
