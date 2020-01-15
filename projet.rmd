@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 :---
 title: "Projet d'Analyse et de Fouille de Données Massive"
 output:
@@ -13,7 +18,7 @@ setwd("/home/jyra/Documents/Enssat/3A/AFDM/DataMiningProject")
 ```
 
 # Introduction :
-&ensp;Le but du projet est de manipuler différentes méthodes d'analyses de données sur un jeu de données constitué d'une centaine d'individus et d'une dizaine de variables qualitatives et quantitatives. Nous avons choisi comme jeu de données les vidéos présentes dans la catégorie "Tendances" du site YouTube France sur une période allant de novembre 2017 à juin 2018. La catégorie "Tendances" de YouTube met en évidence les vidéos les plus vues et les plus appréciées par les utilisateurs de la plateforme. Elle permet donc une plus grande visibilité pour les créateurs de contenu. Une vidéo est placée dans la catégorie "Tendances" par un algorithme se fondant sur les statistiques de la vidéo ainsi que sur les interactions des utilisateurs avec celle-ci. L'analyse des facteurs permettant à une vidéo d'être présente en "Tendances" peut donc être intéressante pour les vidéastes de la plateforme souhaitant être mis en avant. 
+&ensp;Le but du projet est de manipuler différentes méthodes d'analyses de données sur un jeu de données constitué d'une centaine d'individus et d'une dizaine de variables qualitatives ou quantitatives. Nous avons choisi comme jeu de données les vidéos présentes dans la catégorie "Tendances" du site YouTube France sur une période allant de novembre 2017 à juin 2018. La catégorie "Tendances" de YouTube met en évidence les vidéos les plus vues et les plus appréciées par les utilisateurs de la plateforme. Elle permet donc une plus grande visibilité pour les créateurs de contenu. Une vidéo est placée dans la catégorie "Tendances" par un algorithme se fondant sur les statistiques de la vidéo ainsi que sur les interactions des utilisateurs avec celle-ci. L'analyse des facteurs permettant à une vidéo d'être présente en "Tendances" peut donc être intéressante pour les vidéastes de la plateforme souhaitant être mis en avant. 
 
 ## Présentation de nos données :
 
@@ -34,7 +39,19 @@ setwd("/home/jyra/Documents/Enssat/3A/AFDM/DataMiningProject")
 |        Moment de la  journée       |  qualitatif |
 |    Nombre de lien en description   | quantitatif |
 
-&ensp;Nous pouvons nous attendre à une forte corrélation entre la présence d'une vidéo en "Tendances" et son nombre de vues, de "J'aime" et de commentaires. Néanmoins, d'autres variables peuvent influer de manière indirecte sur le nombre de vues comme le nombre de majuscules dans le titre, le nombre de tags associés à la vidéo ou encore la longueur de la description. La publication de la vidéo peut également être ciblée afin de toucher le plus de personnes possible (une vidéo publiée le vendredi soir à 18h aura probablement plus d'impact qu'une vidéo publiée le mardi matin à 8h). Nous serons également en mesure d'exhiber le type de vidéos qui plaisent au public français via la catégorie mais aussi de comparer les audiences des vidéos appartenant à différentes catégories (par exemple, les personnes regardant des vidéos sportives consultent également des vidéos de mode ou de divertissement). 
+&ensp;Nous pouvons nous attendre à une forte corrélation entre la présence d'une vidéo en "Tendances" et son nombre de vues, de "J'aime" et de commentaires, les vidéos mise en tendance le sont car les utilisateurs ont beaucoups interragis avec. 
+
+Néanmoins, d'autres variables peuvent influer de manière indirecte sur les paramètres cité, nous allons donc justifier le choix des autres variables.
+
+&ensp;Le nombre de majuscule nous semble pertinent, car nous avons remarqué une tendance des vidéastes à utiliser des titres entierrement en majsucule, ils auraient l'avantage d'attirer l'oeil des consommateurs de YouTube et donc d'apporter plus facilement des "vues" sur la vidéo. 
+
+&ensp;Le nombre de tags est un autre paramètre important, youtube propose aussi des recommandations personnalisées aux utilisateurs en fonction de leurs centres d'intérêts. Une vidéo pourrait donc gagner plus facilement en notoriété si elle était recommandé à plusieurs publique différents. De plus, certains tags sont dit "tendance" lorsqu'ils sont d'actualités, ainsi lors des incidents récent avec l'Iran le tag "WWIII" est devenue un tag fréquent car de nombreux internautes crégnait une escalade. Cela à permis à certains YouTuber politique par exemple d'exploiter cette tendance en sortant du contenue en rapport avec ce tag.
+
+&ensp;Un autre élément qui pourrait nous donner des indicateurs d'une vidéo mise en avant par l'algorithme de YouTube serait l'espace de description de la vidéo. Chaque vidéo doivent posséder une description. Elles sont généralement utilisé pour donner un résumé de la vidéo, des liens vers les sources de la vidéo, des réseaux sociaux du créateur mais aussi vers des magasins en ligne, des sponsors ou alors d'autres chaîne YouTube dans le cadre de collaboration. Nous allons nous interresser à la longueur de la description, en effet, la majorité des créateurs qui se sont professionalisé possèdent des descriptions fournis. Cela peut bien sûr aussi être le cas pour des vidéastes plus amateurs, cette mesure sera donc discutable. Toujours en rapport avec la description, nous avons compté le nombre de lien que possédaient la description. En effet, à part les chaînes d'information et de vulgarisation, la majorité des chaînes proposent un lien vers 1 magasin, 3-4 réseaux sociaux et éventuellement 1 sponsor. Cependant, lorsqu'elle réalise une collaboration avec d'autres "YouTuber", on voit apparaitre un lien vers la chaîne de cette autre personne. Il est reconnu qu'actuellement les vidéos réalisé avec plusieurs vidéastes ont un meilleur publique et sont devenue beaucoups plus commune. Nous esperons donc à travers cette variable mettre en avant ce phénomène.
+
+&ensp;La publication d'une vidéo peut également être ciblée afin de toucher le plus de personnes possible (une vidéo publiée le vendredi soir à 18h aura probablement plus d'impact qu'une vidéo publiée le mardi matin à 8h), c'est pour cela que nous nous interressons au moment de la publication d'une vidéo. Pour les moments de la journée, nous les avons découpé ainsi : 00:00 -> 11:59 = "morning", 12:00 -> 19:00 = "afternoon" et le reste est alloué au "evening". 
+
+&ensp;Nous serons également en mesure d'exhiber les types de vidéos qui ont des réultats similaire au près du public français via la catégorie mais aussi de comparer les audiences des vidéos appartenant à différentes catégories (par exemple, les personnes regardant des vidéos sportives seraient peut-être plus prompt à consulter des vidéos de mode ou de divertissement). 
 
 
 ## Traitement du jeu de données
@@ -54,7 +71,6 @@ data = data[sample(nrow(data), 100),]
 Code pour récupérer les 100 individus que nous avons utilisé et sauvegardé :
 
 ```{r}
-setwd("/home/DataMiningProject")
 load('./random_data.rdata')
 ```
 
@@ -136,18 +152,19 @@ res.mca_1 = MCA(data_ACM, quali.sup = c(4), graph = FALSE)
 plot.MCA(res.mca_1, invisible=c("var"), cex=0.75)
 ```
 
-La prochaine ACM cherche à étudier les corrélations entre les moments de la journée. Intuitivement, on pourrait penser que les vidéos qui sortent l'après-midi n'ont pas le même succés qu'une vidéo qui sortirait le matin ou le soir. 
-
 &ensp;Les résultats obtenus sont plutôt satisfaisants, même si l'on représente peu les données (5.31%). On peut observer que certains jours sont reliés comme le Jeudi et Mercredi. Cela semble cohérent qu'ils possèdent la même visibilité car ils se trouvent tous deux en milieu de semaine. Le Vendredi se retrouve un peu à part; on peut penser que les vidéos publiées le vendredi s'adressent davantage à un publique adulte, qui regarderait les vidéos après le travail. Résultat plus étonnant, on constate que le Samedi et Lundi sont liés ainsi que le Mardi et Dimanche. 
 
 ## Moment de la journée
+
+&ensp;La prochaine ACM cherche à étudier les corrélations entre les moments de la journée. Intuitivement, on pourrait penser que les vidéos qui sortent l'après-midi n'ont pas le même succés qu'une vidéo qui sortirait le matin ou le soir. C'est ce que nous allons vérifier :
 
 ```{r}
 res.mca_2 = MCA(data_ACM, quali.sup = c(5), graph = FALSE)
 plot.MCA(res.mca_2, invisible=c("var"), cex=0.75)
 ```
 
-L'ACM est 
+&ensp;Comme attendu les vidéos posté l'après-midi et le soir ont un succés similaire. Les vidéos posté le matin sont à part. Cependant, on peut voir qu'autour des variables "afternoon" et "evening", il y a peu de variable. À l'opposé, on retrouve certaines variable collé à l'attribut "morning". Et enfin, on retrouve un nuage de point qui se situent dans la zone des x et y négatifs qui ne semblent liée à aucun attribut, cela semble un peu étrange et on ne saurait pas vraiment comment l'expliquer.
+
 ## Catégorie
 ```{r}
 res.mca_3 = MCA(data_ACM, quali.sup = c(7), graph = FALSE)
@@ -158,9 +175,16 @@ plot.MCA(res.mca_3, invisible=c("var"), cex=0.75)
 
 # Analyse Factorielle des Correspondances (AFC)
 
+&ensp;La dernière analyse que nous proposons est l'AFC. Grâce à cette méthode, nous allons mettre en évidence les attributs qui fédèrent le plus d'individu.
 ```{r}
 data_AFC = data
 res.afc = CA(data_AFC[, c(2:5 ,12:13)])
 ```
 
+La figure obtenue est très interressante, tout d'abord on peut voir que toutes les vidéos en tendance partagent un nombre de vues relativement proche. On voit aussi que le nombre de lien en description est un facteur partagé par plusieurs vidéo. Cela va dans le sens que les vidéos collaborative entre créateur semble avoir du succès. Généralement les vidéastes mettent en description des liens vers leurs sites webs et/ou boutiques, mais aussi les chaînes des autres vidéastes lorsqu'ils font une collaboration. Un autre attribut proche du nombre de lien est le nombre de tags de la vidéo. Les tags aident à mettre la vidéo en avant, ils sont utiles notamment si la vidéo traite d'une actualité. Mais ce n'est pas tous certains tags peuvent monatément profiter d'une certaine notoriété. A la sortie d'un nouveau jeu vidéo, il est probable que le tag "Jeux" soit mis en avant. 
+Enfin, on peut remarquer que l'attribut "UpperCase" est plus proche du nuage de points que le "LowerCase". Cela semble indiquer que mettre les titres avec des majuscules attirent plus le publique.
 
+
+## Conclusion
+
+Nous avons analysé les données des vidéos YouTube Française qui ont finis en tendance. Ce travail nous a permis de mettre en application des méthodes d'apprentissage que nous avons vu en cours. Nous avons pu confirmer certains apriori que nous avions sur nos données mais aussi découvrir des liens qui nous on étonné.
