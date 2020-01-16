@@ -1,0 +1,511 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+:--- title: ``Projet d'Analyse et de Fouille de Données Massive''
+output: html\_document: df\_print: paged pdf\_document: default ---
+
+\hypertarget{projet-danalyse-et-de-fouille-de-donnuxe9es-massive}{%
+\section{Projet d'Analyse et de Fouille de Données
+Massive}\label{projet-danalyse-et-de-fouille-de-donnuxe9es-massive}}
+
+\hypertarget{introduction}{%
+\subsection{Introduction :}\label{introduction}}
+
+ Le but du projet est de manipuler différentes méthodes d'analyses de
+données sur un jeu de données constitué d'une centaine d'individus et
+d'une dizaine de variables qualitatives ou quantitatives. Nous avons
+choisi comme jeu de données les vidéos présentes dans la catégorie
+``Tendances'' du site YouTube France sur une période allant de novembre
+2017 à juin 2018. La catégorie ``Tendances'' de YouTube met en évidence
+les vidéos les plus vues et les plus appréciées par les utilisateurs de
+la plateforme. Elle permet donc une plus grande visibilité pour les
+créateurs de contenu. Une vidéo est placée dans la catégorie
+``Tendances'' par un algorithme se fondant sur les statistiques de la
+vidéo ainsi que sur les interactions des utilisateurs avec celle-ci.
+L'analyse des facteurs permettant à une vidéo d'être présente en
+``Tendances'' peut donc être intéressante pour les vidéastes de la
+plateforme souhaitant être mis en avant.
+
+\hypertarget{pruxe9sentation-de-nos-donnuxe9es}{%
+\subsubsection{Présentation de nos données
+:}\label{pruxe9sentation-de-nos-donnuxe9es}}
+
+ Nous avons extrait nos données du site Kaggle
+(\url{https://www.kaggle.com/datasnaek/youtube-new}). Ces données
+contiennent un ensemble de statistiques sur les vidéos de la catégorie
+``Tendances'' de YouTube. Nous avons décidé d'extraire les statistiques
+qui nous paraissaient pertinentes pour pouvoir déterminer les facteurs
+influant sur la présence ou non d'une vidéo dans la catégorie
+``Tendances''. Ces statistiques sont resumées dans le tableau suivant et
+seront utilisées comme variables qualitatives ou quantitatives dans les
+différentes méthodes d'analyse des données.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Nom & Attribut\tabularnewline
+\midrule
+\endhead
+Taux LOWER Case & quantitatif\tabularnewline
+Taux UPPER Case & quantitatif\tabularnewline
+Nb tags & quantitatif\tabularnewline
+Nb vues & quantitatif\tabularnewline
+Nb commentaires & quantitatif\tabularnewline
+Nb likes & quantitatif\tabularnewline
+Nb dislikes & quantitatif\tabularnewline
+Taille de la description (en mots) & quantitatif\tabularnewline
+Catégorie & qualitatif\tabularnewline
+Jour de la semaine & qualitatif\tabularnewline
+Moment de la journée & qualitatif\tabularnewline
+Nombre de lien en description & quantitatif\tabularnewline
+\bottomrule
+\end{longtable}
+
+ Nous pouvons nous attendre à une forte corrélation entre la présence
+d'une vidéo en ``Tendances'' et son nombre de vues, de mentions
+``J'aime'' et de commentaires. Les vidéos sont placées dans la catégorie
+``Tendances'' principalement à cause du fait que les utilisateurs ont
+beaucoup interragi avec. Néanmoins, d'autres variables peuvent influer
+de manière indirecte sur les paramètres cités précedemment.
+
+ Le nombre de majuscules nous semble pertinent, car nous avons remarqué
+une tendance des vidéastes à utiliser des titres uniquement composés de
+majuscules afin d'attirer l'oeil des utilisateurs de YouTube, et donc
+d'augmenter plus facilement le nombre de ``vues'' sur la vidéo.
+
+ Le nombre de tags est un autre paramètre important car YouTube propose
+des recommandations personnalisées aux utilisateurs en fonction de leurs
+centres d'intérêts. Une vidéo pourrait donc bénéficier d'une audience
+plus importante si elle était recommandée à plusieurs publics
+différents. De plus, certains tags sont considérés comme ``tendance''
+lorsqu'ils sont en lien avec l'actualité. Ainsi, lors des incidents
+récents entre l'Iran et les Etats-Unis, le tag ``WWIII'' est devenu
+fréquent sur la plateforme car de nombreux internautes craignaient une
+détérioration de la situation. Cela a permis à certains créateurs de
+contenu politique, par exemple, d'exploiter cette tendance en publiant
+du contenu connexe à ce tag.
+
+ Un autre élément qui pourrait nous donner des indicateurs sur la mise
+en avant d'une vidéo par l'algorithme de YouTube serait l'espace de
+description de la vidéo. Chaque vidéo doit posséder une description. Les
+descriptions sont généralement utilisées pour résumer la vidéo, mettre à
+disposition des utilisateurs les liens vers les sources de la vidéo, les
+différentes pages sur les réseaux sociaux du créateur mais aussi vers
+des magasins en ligne, des sites de sponsors ou alors d'autres chaînes
+YouTube dans le cadre d'une collaboration. Nous allons plus
+particulièrement nous intéresser à la longueur de la description. En
+effet, la majorité des créateurs qui vivent de leur activité sur YouTube
+possèdent des descriptions longues et détaillées. Cela peut bien sûr
+aussi être le cas pour des vidéastes plus amateurs. Nous avons également
+compté le nombre de liens que possédait la description. En effet, mis à
+part les chaînes d'information et de vulgarisation, la majorité des
+chaînes proposent un lien vers un magasin en ligne, trois ou quatre
+liens vers des pages de réseaux sociaux et éventuellement des liens vers
+des sites de sponsors. Cependant, lorsqu'une vidéo est le fruit d'une
+collaboration avec d'autres créateurs, un lien vers la chaîne YouTube de
+cette autre personne est généralement présent dans la description. Les
+vidéos réalisées avec plusieurs vidéastes attirent un public plus large
+et sont devenues beaucoup plus communes qu'auparavant sur la plateforme.
+Nous esperons donc, à travers cette variable, mettre en avant ce
+phénomène.
+
+ La publication d'une vidéo peut également être ciblée afin de toucher
+le plus de personnes possible (une vidéo publiée le vendredi soir à 18h
+aura probablement plus d'impact qu'une vidéo publiée le mardi matin à
+8h). Nous avons donc choisi de nous intéresser au moment auquel une
+vidéo a été mise en ligne. Nous avons découpé de la manière suivante les
+moments de la journée pour nos analyses : 00:00 -\textgreater{} 11:59 =
+``morning'', 12:00 -\textgreater{} 19:00 = ``afternoon'' et le reste est
+considéré comme ``evening''.
+
+ Nous serons également en mesure d'exhiber les types de vidéos qui sont
+le plus visionnées par le public français, à travers la catégorie de la
+vidéo. Ce facteur nous permettra également de comparer les audiences des
+vidéos appartenant à différentes catégories (par exemple, les personnes
+regardant des vidéos sportives seraient peut-être plus enclines à
+consulter des vidéos de mode ou de divertissement que les personnes
+visionnant des vidéos ``Gaming'').
+
+\hypertarget{traitement-du-jeu-de-donnuxe9es}{%
+\subsubsection{Traitement du jeu de
+données}\label{traitement-du-jeu-de-donnuxe9es}}
+
+ A partir du jeu de données télechargé au format csv, nous avons généré
+un nouveau fichier csv contenant, pour chaque vidéo, les statistiques
+listées dans le tableau précédent Vous pouvez retrouver le code commenté
+pour l'extraction et le traitement des données brutes initiales dans le
+fichier `processData.py'.
+
+\hypertarget{analyse-des-donnuxe9es}{%
+\subsubsection{Analyse des données}\label{analyse-des-donnuxe9es}}
+
+ Dans cette partie, nous allons analyser les données que nous avons
+extraites et qui se trouvent dans le fichier ``youtubeTrends.csv''. Ce
+fichier contient 40703 individus. Néanmoins les méthodes d'analyse
+détaillées dans cette partie ne porteront que sur une centaine
+d'invidus. Nous sélectionnons donc 100 vidéos de manière aléatoire dans
+le fichier ``youtubeTrends.csv''.
+
+Code pour selectionner les 100 individus aléatoirement :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# data = read.csv("./DATA/youtubeTrends.csv")}
+\CommentTok{# data = data[sample(nrow(data), 100),]}
+\end{Highlighting}
+\end{Shaded}
+
+Code pour récupérer les 100 individus que nous avons utilisé et
+sauvegardé :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\StringTok{'./random_data.rdata'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{analyse-en-composantes-principales-acp}{%
+\section{Analyse en Composantes Principales
+(ACP)}\label{analyse-en-composantes-principales-acp}}
+
+ La première analyse que nous allons effectuer sera une ACP. Cette
+analyse ne porte que sur des données qualitatives. Ainsi, il faut
+retirer de nos données les variables qualitatives. Ensuite, on applique
+l'ACP sur les données filtrées.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# On retire les données qualitatives}
+\NormalTok{data_ACP =}\StringTok{ }\NormalTok{data}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{category <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{momentOfDay <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{index <-}\StringTok{ }\OtherTok{NULL}
+
+\CommentTok{# On retire les données considérées comme faiblement corellées après les premiers tests }
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbTags <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbWords <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbLinks <-}\StringTok{ }\OtherTok{NULL}
+
+\CommentTok{# On applique l'ACP sur les données filtrées}
+\NormalTok{res.pca =}\StringTok{ }\KeywordTok{PCA}\NormalTok{(data_ACP, }\DataTypeTok{scale.unit=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{ncp=}\DecValTok{6}\NormalTok{, }\DataTypeTok{graph=}\NormalTok{T) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-3-1.pdf}
+\includegraphics{projet_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+ Sur la figure, on constate que les données sont bien représentées. En
+effet, 46.89\% des données sont représentées sur l'axe 1 et 28.47\% sur
+l'axe 2. On voit que le nombre de likes et dislikes sont corrélés.
+Néanmoins, après analyse, il apparaît que ces deux variables ne
+capturent pas vraiment ce que l'on voulait. En effet, nous ne savons pas
+en quoi elles sont corrélées (si un grand nombre de likes est associé à
+un grand nombre de dislikes\ldots). Ainsi, pour voir l'impact du nombre
+de likes et de dislikes, on introduit deux nouvelles variables
+quantitatives : le ratio de like et le ratio de dislikes par vidéo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# On retire les données qualitatives}
+\NormalTok{data_ACP =}\StringTok{ }\NormalTok{data}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{category <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{momentOfDay <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{index <-}\StringTok{ }\OtherTok{NULL}
+
+\CommentTok{# On retire les données faiblement corellé}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbTags <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbWords <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbLinks <-}\StringTok{ }\OtherTok{NULL}
+
+\CommentTok{# Ajout du ratio de like et dislike}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{ratioLikes <-}\StringTok{ }\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbLikes}\OperatorTok{/}\NormalTok{(data_ACP}\OperatorTok{$}\NormalTok{nbLikes }\OperatorTok{+}\StringTok{ }\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbDislikes)}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{ratioDislikes <-}\StringTok{ }\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbDislikes}\OperatorTok{/}\NormalTok{(data_ACP}\OperatorTok{$}\NormalTok{nbLikes }\OperatorTok{+}\StringTok{ }\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbDislikes)}
+
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbLikes <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACP}\OperatorTok{$}\NormalTok{nbDislikes <-}\StringTok{ }\OtherTok{NULL}
+
+\NormalTok{res.pca =}\StringTok{ }\KeywordTok{PCA}\NormalTok{(data_ACP, }\DataTypeTok{scale.unit=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{ncp=}\DecValTok{6}\NormalTok{, }\DataTypeTok{graph=}\NormalTok{T) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in PCA(data_ACP, scale.unit = TRUE, ncp = 6, graph = T): Missing values
+## are imputed by the mean of the variable: you should use the imputePCA function
+## of the missMDA package
+\end{verbatim}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{projet_files/figure-latex/unnamed-chunk-4-2.pdf}   On
+observe que le ratio de likes et de dislikes sont inversement corrélés.
+En effet, cela semble cohérent qu'une vidéo en ``Tendances'' ayant un
+fort nombre de mentions ``J'aime'' ait une faible proportion de mentions
+``Je n'aime pas'' et c'est bien ce que l'on constate sur le graphe
+résultant de l'ACP.
+
+\hypertarget{analyse-des-composantes-multiples-acm}{%
+\subsection{Analyse des Composantes Multiples
+(ACM)}\label{analyse-des-composantes-multiples-acm}}
+
+ Dans cette partie, nous allons réaliser une ACM sur 3 attributs
+qualitatifs : le jour de la semaine où la vidéo est publiée, le moment
+de la journée et la catégorie de la vidéo.
+
+ Dans un premier temps, nous préparons les données en enlevant la moitié
+des données. En effet, si l'on choisit d'effectuer l'ACP sur l'ensemble
+des données, le graphe résultant contient trop de points superposés et
+il est difficile de l'interpréter. Ensuite, il faut effectuer une petite
+opération pour transformer nos données en type Factor (un type
+spécifique à R). Cette opération est necessaire car sans cela, nous
+obtenons une erreur. Enfin, on retire tous les attributs quantitatifs
+sauf le nombre de likes, dislikes et de commentaires. On conserve ces
+attributs car on souhaite regrouper les attributs qualitatifs en
+fonction de leur poids sur le fait que la vidéo soit en ``Tendances'',
+qui se représente à l'aide des 3 variables quantitatives ci-dessus.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_ACM =}\StringTok{ }\NormalTok{data[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{,] }
+\NormalTok{i=}\DecValTok{0}
+\ControlFlowTok{while}\NormalTok{(i}\OperatorTok{<}\KeywordTok{ncol}\NormalTok{(data_ACM))\{}
+\NormalTok{  i=i}\OperatorTok{+}\DecValTok{1}
+\NormalTok{  data_ACM[,i]=}\KeywordTok{as.factor}\NormalTok{(data_ACM[,i])}
+\NormalTok{\}}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{index <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{nbTags <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{nbWords <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{nbLinks <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{X.lowerCase <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{data_ACM}\OperatorTok{$}\NormalTok{X.upperCase <-}\StringTok{ }\OtherTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{moment-de-la-semaine}{%
+\subsubsection{Moment de la semaine}\label{moment-de-la-semaine}}
+
+ Nous nous interessons, dans un premier temps, au moment de la journée
+où la vidéo à été publiée. On s'attend éventuellement à voir regroupés
+ensemble des jours de la semaine qui sont proches (en fonction de s'ils
+sont en début, milieu et fin de semaine).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.mca_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\KeywordTok{MCA}\NormalTok{(data_ACM, }\DataTypeTok{quali.sup =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{), }\DataTypeTok{graph =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{plot.MCA}\NormalTok{(res.mca_}\DecValTok{1}\NormalTok{, }\DataTypeTok{invisible=}\KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{), }\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+ Les résultats obtenus sont plutôt satisfaisants, même si l'on
+représente peu les données (2.82\%). On peut observer que certains jours
+sont reliés comme le Lundi, Mardi et Mercredi. Cela semble cohérent
+qu'ils aient la même visibilité, car ils se trouvent tous deux en milieu
+de semaine. De la même manière, le Vendredi est extrèmement corrélé au
+Samedi et au Dimanche. Résultat plus étonnant, on constate que le Jeudi
+est isolé dans le graphique, les vidéos publiées le Jeudi doivent donc
+être visualisées par un public ciblé.
+
+\hypertarget{moment-de-la-journuxe9e}{%
+\subsubsection{Moment de la journée}\label{moment-de-la-journuxe9e}}
+
+ La prochaine ACM cherche à étudier les corrélations entre les moments
+de la journée où sont publiés une vidéo. Intuitivement, on pourrait
+penser que les vidéos qui sortent l'après-midi n'ont pas le même
+``succès'' qu'une vidéo qui a été publiée le matin ou le soir.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.mca_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\KeywordTok{MCA}\NormalTok{(data_ACM, }\DataTypeTok{quali.sup =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{), }\DataTypeTok{graph =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{plot.MCA}\NormalTok{(res.mca_}\DecValTok{2}\NormalTok{, }\DataTypeTok{invisible=}\KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{), }\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+ Sur le graphique résultant, on constate que les individus peuvent être
+regroupés en deux catégories. Tout d'abord, la majorité des vidéos en
+``Tendances'' sont publiées l'après-midi ou le soir. Néanmoins, un
+certain nombre de vidéos présentes dans la catégorie ``Tendances'' ont
+été mises en ligne le matin. Cela peut s'interpréter de deux manières.
+D'une part, ces vidéos peuvent être destinées à un public particulier,
+pouvant les regarder le matin. D'autre part, ces vidéos peuvent être
+brèves (comme celles présentes sur les réseaux sociaux) donc pouvant
+être visionnées rapidement par les utilisateurs et/ou traitant
+d'actualité.
+
+\hypertarget{catuxe9gorie}{%
+\subsubsection{Catégorie}\label{catuxe9gorie}}
+
+  Enfin, la dernière ACM porte sur les catégories des vidéos présentes
+dans la catégorie ``Tendances''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.mca_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\KeywordTok{MCA}\NormalTok{(data_ACM, }\DataTypeTok{quali.sup =} \KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{), }\DataTypeTok{graph =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{plot.MCA}\NormalTok{(res.mca_}\DecValTok{3}\NormalTok{, }\DataTypeTok{invisible=}\KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{), }\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-8-1.pdf}  Nous
+remarquons que de nombreuses catgéories sont liées entre elles dans le
+sens où elles ont des audiences communes. Ainsi, sur le graphique, nous
+constatons que les personnes regardant des vidéos de la catégorie
+``Howto \& Style'', visionnent également des vidéos appartenant aux
+catégories ``News and Politics'' et ``Comedy''. De manière similaire,
+les personnes regardant des vidéos de la catégorie ``Gaming'' visionnent
+également des vidéos traitant de sport et de voyage.
+
+\hypertarget{analyse-factorielle-des-correspondances-afc}{%
+\subsection{Analyse Factorielle des Correspondances
+(AFC)}\label{analyse-factorielle-des-correspondances-afc}}
+
+ La dernière analyse que nous proposons est l'AFC. Grâce à cette
+méthode, nous allons mettre en évidence les attributs qui fédèrent le
+plus d'individus.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_AFC =}\StringTok{ }\NormalTok{data}
+\NormalTok{res.afc =}\StringTok{ }\KeywordTok{CA}\NormalTok{(data_AFC[, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{5}\NormalTok{ ,}\DecValTok{12}\OperatorTok{:}\DecValTok{13}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+La figure obtenue est très intéressante, tout d'abord on constate que
+toutes les vidéos en tendance partagent un nombre de vues relativement
+proche. Le nombre de liens en description de la vidéo est également
+proche du nuage de points. Cela confirme que les vidéos collaboratives
+entre créateurs génèrent plus de visionnages. Un autre attribut proche
+du nombre de liens est le nombre de tags de la vidéo. Les tags aident à
+mettre la vidéo en avant et sont utiles, notamment, si la vidéo traite
+de l'actualité. De plus, certains tags peuvent momentanément profiter
+d'une certaine notoriété. A la sortie d'un nouveau jeu vidéo, il est
+probable que le tag ``Jeux'' ou ``Gaming'' soit mis en avant. Enfin, on
+peut remarquer que l'attribut ``UpperCase'' est plus proche du nuage de
+points que l'attribut ``LowerCase''. Cela semble indiquer qu'écrire les
+titres en majuscule attire davantage les utilisateurs du site.
+
+\hypertarget{conclusion}{%
+\subsubsection{Conclusion}\label{conclusion}}
+
+Nous avons analysé les données issues des vidéos de la catégorie
+``Tendances'' du site YouTube (France). Ce travail nous a permis
+d'appliquer les méthodes d'analyse et de fouille de données que nous
+avons vues en cours. Nous avons ainsi pu confirmer certaines hypothèses
+sur les facteurs aboutissant au fait qu'une vidéo soit présente en
+``Tendances'' mais aussi découvrir des liens qui nous ont étonnés.
+
+\end{document}
